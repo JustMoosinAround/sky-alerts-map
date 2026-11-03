@@ -1,0 +1,98 @@
+{
+ "updated": "2026-11-03T22:50:00Z",
+ "stale_hours": 12,
+ "dot_spacing_km": 5,
+ "title": "Sky Forecast",
+ "logo": "logo.png",
+ "contact_url": "https://www.tylermyatesphotography.com/contact",
+ "contact_label": "Contact me",
+ "tabs": [
+  {
+   "id": "sunset",
+   "label": "Sunset",
+   "when": "2026-11-04T01:51:35Z",
+   "title": "Sunset sky · Tue Nov 3, 4:51 PM",
+   "subtitle": "Bigger, denser dots = better light · ECMWF, GFS, ICON",
+   "file": "sunset.json",
+   "error": null
+  },
+  {
+   "id": "aurora",
+   "label": "Aurora",
+   "when": "2026-11-04T09:45:00Z",
+   "title": "Aurora tonight · 6:35 PM–6:55 AM",
+   "subtitle": "Bigger dots = clearer, darker sky",
+   "file": "aurora.json",
+   "error": null
+  }
+ ],
+ "spots": [
+  {
+   "name": "Hatcher Pass <North> & Gap",
+   "lat": 61.776,
+   "lon": -149.283
+  }
+ ],
+ "legend": {
+  "aurora": [
+   [
+    "dark",
+    "#0C447C",
+    "Clear and dark"
+   ],
+   [
+    "twilight",
+    "#378ADD",
+    "Clear, twilight"
+   ],
+   [
+    "north",
+    "#0F6E56",
+    "Clear to the north"
+   ],
+   [
+    "patchy",
+    "#B4B2A9",
+    "Patchy cloud"
+   ],
+   [
+    "cloudy",
+    "#888780",
+    "Cloudy"
+   ]
+  ],
+  "sky": [
+   [
+    "lit",
+    "#993556",
+    "Lit clouds"
+   ],
+   [
+    "ceiling",
+    "#534AB7",
+    "Lit cloud ceiling"
+   ],
+   [
+    "alpenglow",
+    "#D85A30",
+    "Alpenglow behind you"
+   ],
+   [
+    "plain",
+    "#BA7517",
+    "Clear but plain"
+   ],
+   [
+    "partly",
+    "#B4B2A9",
+    "Partly blocked"
+   ],
+   [
+    "blocked",
+    "#888780",
+    "Blocked"
+   ]
+  ]
+ },
+ "credits": "Forecast: Open-Meteo (ECMWF, GFS, ICON) · Space weather: NOAA SWPC"
+}
