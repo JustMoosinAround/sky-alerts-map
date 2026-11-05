@@ -12,6 +12,9 @@
   var STORE_KEY = "skymap.tab";
   var DOT_OPACITY = 0.85;
   var STALE_OPACITY = 0.4;
+  // Grey "no good" dots are drawn mostly see-through so the base map stays readable.
+  var FAINT_KINDS = { blocked: 1, partly: 1, cloudy: 1, patchy: 1 };
+  var FAINT_FILL = 0.3;
   var DEFAULT_SPACING_KM = 5;
 
   var $ = function (id) { return document.getElementById(id); };
@@ -231,9 +234,10 @@
     dots.forEach(function (pair) {
       var d = pair[0];
       var r = radiusFor(d[4], spacing);
+      var faint = !!FAINT_KINDS[d[2]];
       var fill = L.circleMarker([d[0], d[1]], {
         renderer: renderer, radius: r, stroke: false,
-        fillColor: d[3], fillOpacity: opacity, bubblingMouseEvents: false,
+        fillColor: d[3], fillOpacity: faint ? opacity * FAINT_FILL : opacity, bubblingMouseEvents: false,
       });
       fill.bindPopup(function () { return dotPopup(tab, file, d, null); }, { maxWidth: 260 });
       dotLayer.addLayer(fill);
@@ -342,7 +346,8 @@
     ((index.legend && index.legend[mapType]) || []).forEach(function (row) {
       var li = el("li");
       var sw = el("span", "legend-swatch");
-      sw.style.background = row[1];
+      if (FAINT_KINDS[row[0]]) { sw.className += " legend-swatch-faint"; sw.style.borderColor = row[1]; sw.style.background = row[1] + "4d"; }
+      else sw.style.background = row[1];
       li.appendChild(sw);
       li.appendChild(document.createTextNode(row[2]));
       list.appendChild(li);

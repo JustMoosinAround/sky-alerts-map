@@ -273,6 +273,7 @@ main {
 .legend-list { list-style: none; margin: 0 0 6px; padding: 0; }
 .legend-list li { display: flex; align-items: center; gap: 8px; padding: 1.5px 0; }
 .legend-swatch { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.legend-swatch-faint { box-sizing: border-box; border: 1px solid; }
 .legend-note {
   display: flex;
   align-items: center;
