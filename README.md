@@ -48,15 +48,17 @@ The `gh-pages` branch does not exist until the workflow has run once, so do this
 3. In the private repo's `settings.yaml`, check `public_map: contact_url:` is the page you want the **Contact me** button to open.
 4. The file `site/index.html` here also has a fallback Contact me address, used only if the forecast data fails to load. Make sure it matches `public_map.contact_url` in `settings.yaml`; they are two copies of the same address, so change both if it ever changes.
 
-### 5. Choose which spots are public
+### 5. Turn the map on (spots are optional)
 
-In the private repo's `settings.yaml`, add `public: true` to each spot you want on the map, and make sure the `public_map:` block has `enabled: true` and `site_url: https://justmoosinaround.github.io/sky-alerts-map/`. Commit and push. Spots without `public: true` stay private. See the private README, "Public map".
+In the private repo's `settings.yaml`, make sure the `public_map:` block has `enabled: true` and `site_url: https://justmoosinaround.github.io/sky-alerts-map/`. Commit and push.
+
+You do not need any public spots: the map works without them. If you want a spot shown as a pin, add `public: true` to it. Spots without `public: true` stay private. See the private README, "Public map".
 
 ### 6. Run it once by hand
 
 1. In this repo open the **Actions** tab, choose **publish-map**, click **Run workflow**.
 2. Wait about 5 minutes. A green tick means it worked; the `gh-pages` branch now exists, so do step 3 now.
-3. If it is red, open the run and read the red step. Most often: the secret name is mistyped, the token has no access to `sky-alerts`, or `settings.yaml` has `public_map.enabled: false` or no `public: true` spots.
+3. If it is red, open the run and read the red step. Most often: the secret name is mistyped, the token has no access to `sky-alerts`, or `settings.yaml` has `public_map.enabled: false`.
 4. Open the page address from step 3 on your phone and on a computer and check the map, tabs, and Contact me button.
 
 After this, it refreshes by itself three times a day.
