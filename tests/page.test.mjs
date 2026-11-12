@@ -122,6 +122,7 @@ const cases = {
     if (dot[6]) assert.ok(text.includes("models disagree"));
     assert.ok(text.includes("Sunset Tue 4:51 PM"), text);
     assert.ok(text.includes(`Light blocked ${dot[7].block}% · Cloud canvas ${dot[7].canvas}%`), text);
+    assert.ok(text.includes(`Sunset: ${dot[7].chance}% chance`), text);
   },
 
   async "night popup has no grade word"(vp) {

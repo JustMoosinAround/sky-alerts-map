@@ -285,8 +285,9 @@
     if (d[6]) words.push("models disagree");
     head.appendChild(document.createTextNode(words.join(" · ")));
     box.appendChild(head);
-    box.appendChild(el("p", "pop-when", tab.label + " " + weekdayTime(file.when || tab.when)));
     var m = d[7] || {};
+    if (typeof m.chance === "number") box.appendChild(el("p", "pop-chance", tab.label + ": " + m.chance + "% chance"));
+    box.appendChild(el("p", "pop-when", tab.label + " " + weekdayTime(file.when || tab.when)));
     var metrics = "block" in m
       ? "Light blocked " + m.block + "% · Cloud canvas " + m.canvas + "%"
       : "Cloud overhead " + m.overhead + "% · to the north " + m.north + "%";

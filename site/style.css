@@ -194,6 +194,7 @@ main {
 .pop p { margin: 0; }
 .pop-name { font-weight: 600; margin-bottom: 4px !important; overflow-wrap: anywhere; }
 .pop-head { font-weight: 500; }
+.pop-chance { font-weight: 600; }
 .pop-swatch {
   display: inline-block;
   width: 10px;
