@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: sky-alerts-map
+  group: skyfire-map
   cancel-in-progress: false
 jobs:
   publish:
@@ -18,10 +18,10 @@ jobs:
         with:
           path: pub
           persist-credentials: false
-      - name: Check out the private sky-alerts repo (read-only token)
+      - name: Check out the private skyfire repo (read-only token)
         uses: actions/checkout@v4
         with:
-          repository: JustMoosinAround/sky-alerts
+          repository: JustMoosinAround/skyfire
           token: ${{ secrets.SKY_ALERTS_READ_TOKEN }}
           path: app
           persist-credentials: false
@@ -40,7 +40,7 @@ jobs:
         # stops the job here, so nothing is published and the old page stays up.
         run: |
           cd app
-          skyalerts publish-map --out ../pub/site/data
+          skyfire publish-map --out ../pub/site/data
       - name: Publish to gh-pages
         env:
           TOKEN: ${{ github.token }}
@@ -49,5 +49,5 @@ jobs:
           mkdir -p /tmp/out && cp -a pub/site/. /tmp/out/
           cd /tmp/out
           git init -q && git checkout -q -b gh-pages
-          git add -A && git -c user.name="sky-alerts-bot" -c user.email="actions@users.noreply.github.com" commit -qm "publish $(date -u +%FT%TZ)"
+          git add -A && git -c user.name="skyfire-bot" -c user.email="actions@users.noreply.github.com" commit -qm "publish $(date -u +%FT%TZ)"
           git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages

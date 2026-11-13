@@ -1,6 +1,6 @@
-# Sky Alerts Map (public)
+# SkyFire Map (public)
 
-This repository publishes the public forecast map for Tyler M Yates Photography. It holds only the web page (`site/`), its tests, and one automatic job (`.github/workflows/publish.yml`). The forecast numbers are calculated by the private `sky-alerts` repository and published here three times a day.
+This repository publishes the public forecast map for Tyler M Yates Photography. It holds only the web page (`site/`), its tests, and one automatic job (`.github/workflows/publish.yml`). The forecast numbers are calculated by the private `skyfire` repository and published here three times a day.
 
 Nothing secret lives in this repo. Only spots you mark `public: true` ever appear on the map (name and position rounded to about 100 m).
 
@@ -13,7 +13,7 @@ Do these in order. Step 3 can only be done after step 6 has run once.
 ### 1. Create this repository
 
 1. On github.com click **New repository**.
-2. Owner: JustMoosinAround. Name: `sky-alerts-map`. Choose **Public**. Leave everything else empty.
+2. Owner: JustMoosinAround. Name: `skyfire-map`. Choose **Public**. Leave everything else empty.
 3. Ask Claude to push the page and workflow files into it (Claude needs access to this repo for that).
 
 ### 2. Create the read-only token
@@ -21,13 +21,13 @@ Do these in order. Step 3 can only be done after step 6 has run once.
 The job needs permission to read the private repo. Give it the smallest permission possible.
 
 1. On GitHub click your profile picture, then **Settings > Developer settings > Personal access tokens > Fine-grained tokens > Generate new token**.
-2. Token name: `sky-alerts-map`.
+2. Token name: `skyfire-map`.
 3. Expiration: choose the longest (1 year). **Write the expiry date in the box below.**
 4. Resource owner: JustMoosinAround.
-5. Repository access: **Only select repositories**, then pick `sky-alerts` and nothing else.
+5. Repository access: **Only select repositories**, then pick `skyfire` and nothing else.
 6. Repository permissions: **Contents: Read-only**. (GitHub adds "Metadata: Read-only" by itself; that is expected.) Leave everything else as "No access".
 7. Click **Generate token** and copy it now. GitHub shows it only once.
-8. Open this repo (`sky-alerts-map`) > **Settings > Secrets and variables > Actions > New repository secret**.
+8. Open this repo (`skyfire-map`) > **Settings > Secrets and variables > Actions > New repository secret**.
 9. Name: `SKY_ALERTS_READ_TOKEN`. Secret: paste the token. Save.
 
 **Token expires on: ____ (renew a week before).** To renew, repeat steps 1 to 9 (or open the token and use **Regenerate**), then paste the new value over the old secret. If it lapses, the job fails and the map stops updating (the page then shows an "out of date" notice); nothing breaks otherwise.
@@ -39,7 +39,7 @@ The `gh-pages` branch does not exist until the workflow has run once, so do this
 1. In this repo open **Settings > Pages**.
 2. Source: **Deploy from a branch**.
 3. Branch: `gh-pages`, folder `/ (root)`. Save.
-4. After a minute the page is live at `https://justmoosinaround.github.io/sky-alerts-map/`.
+4. After a minute the page is live at `https://justmoosinaround.github.io/skyfire-map/`.
 
 ### 4. Add your logo and confirm the Contact link
 
@@ -50,7 +50,7 @@ The `gh-pages` branch does not exist until the workflow has run once, so do this
 
 ### 5. Turn the map on (spots are optional)
 
-In the private repo's `settings.yaml`, make sure the `public_map:` block has `enabled: true` and `site_url: https://justmoosinaround.github.io/sky-alerts-map/`. Commit and push.
+In the private repo's `settings.yaml`, make sure the `public_map:` block has `enabled: true` and `site_url: https://justmoosinaround.github.io/skyfire-map/`. Commit and push.
 
 You do not need any public spots: the map works without them. If you want a spot shown as a pin, add `public: true` to it. Spots without `public: true` stay private. See the private README, "Public map".
 
@@ -58,7 +58,7 @@ You do not need any public spots: the map works without them. If you want a spot
 
 1. In this repo open the **Actions** tab, choose **publish-map**, click **Run workflow**.
 2. Wait about 5 minutes. A green tick means it worked; the `gh-pages` branch now exists, so do step 3 now.
-3. If it is red, open the run and read the red step. Most often: the secret name is mistyped, the token has no access to `sky-alerts`, or `settings.yaml` has `public_map.enabled: false`.
+3. If it is red, open the run and read the red step. Most often: the secret name is mistyped, the token has no access to `skyfire`, or `settings.yaml` has `public_map.enabled: false`.
 4. Open the page address from step 3 on your phone and on a computer and check the map, tabs, and Contact me button.
 
 After this, it refreshes by itself three times a day.
@@ -71,7 +71,7 @@ Wix menu names may differ slightly from these; look for the same idea.
 
 1. Open the Wix editor for **Tyler M Yates Photography** and add a new page (or pick the page where the map should go).
 2. Click **Add Elements** (the **+**), then **Embed Code**, then **Embed a site**.
-3. Click the new element, choose **Enter Website Address** (also called **Change Website Address**), and paste `https://justmoosinaround.github.io/sky-alerts-map/`.
+3. Click the new element, choose **Enter Website Address** (also called **Change Website Address**), and paste `https://justmoosinaround.github.io/skyfire-map/`.
 4. Stretch the element to full width and make it about 700 px tall.
 5. Switch to the **mobile view** in the editor, check it, and set the height there too so nothing is cut off.
 6. Click **Publish**.

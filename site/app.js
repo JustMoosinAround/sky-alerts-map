@@ -1,4 +1,4 @@
-/* Sky Alerts public map. Plain script, no build step.
+/* SkyFire public map. Plain script, no build step.
  * Every piece of text from data/ is set with textContent (or as DOM nodes
  * handed to Leaflet), never parsed as HTML. */
 (function () {
@@ -83,7 +83,7 @@
 
   function start(data) {
     index = data;
-    var title = data.title || "Sky Forecast";
+    var title = data.title || "SkyFire";
     $("title").textContent = title;
     document.title = title;
 
