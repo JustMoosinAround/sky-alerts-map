@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>SkyFire</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a id="logo-link" class="logo-link" target="_top" rel="noopener" hidden><img id="logo" alt=""></a>
+  <h1 id="title" class="site-title">SkyFire</h1>
+  <!-- Fallback href so the link still works when index.json cannot load. -->
+  <a id="contact" class="contact" href="https://www.ypsak.com/contact" target="_top" rel="noopener">Contact me</a>
+</header>
+
+<main id="app">
+  <p id="unavailable" class="unavailable" hidden>The sky forecast is unavailable right now. Please check back later.</p>
+  <nav id="tabs" class="tabs" role="tablist" aria-label="Forecast maps"></nav>
+  <p id="when" class="when" aria-live="polite"></p>
+  <p id="stale" class="stale" role="status" hidden></p>
+  <div id="map-wrap" class="map-wrap" hidden>
+    <div id="map" class="map" aria-label="Forecast map"></div>
+    <p id="map-note" class="map-note" hidden></p>
+    <section id="legend" class="legend" aria-label="Legend">
+      <button id="legend-toggle" class="legend-toggle" type="button" aria-expanded="false" aria-controls="legend-body">Legend</button>
+      <div id="legend-body" class="legend-body" hidden>
+        <ul id="legend-list" class="legend-list"></ul>
+        <p class="legend-note"><span class="key-size" aria-hidden="true"><i></i><i></i><i></i></span>Bigger dot = better</p>
+        <p class="legend-note"><span class="key-ring" aria-hidden="true"></span>Dashed ring = models disagree</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer id="footer" class="site-footer" hidden>
+  <p class="how">Each dot is a forecast for that spot: its colour says what kind of sky to expect and its size how good it should be. Tap a dot for details, and pick a tab for each sunrise, sunset or night ahead.</p>
+  <p class="small"><span class="site-credits"></span> · Refreshed 3× daily</p>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

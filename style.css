@@ -1,0 +1,315 @@
+/* SkyFire public map: plain and quiet so it sits inside the photographer's site. */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --text: #1d1d1b;
+  --muted: #6b6a66;
+  --line: #e4e2dc;
+  --panel: rgba(255, 255, 255, 0.94);
+  --accent: #1d1d1b;
+  --accent-text: #ffffff;
+  --map-bg: #e9eef0;
+  --warn-bg: #fdf3e1;
+  --warn-text: #7a4b05;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 4px 14px rgba(0, 0, 0, 0.08);
+  --tile-filter: none;
+  --gutter: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #161615;
+    --text: #ecebe7;
+    --muted: #a3a29c;
+    --line: #34332f;
+    --panel: rgba(30, 30, 28, 0.94);
+    --accent: #ecebe7;
+    --accent-text: #161615;
+    --map-bg: #22272a;
+    --warn-bg: #3a2c12;
+    --warn-text: #f3d39b;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 14px rgba(0, 0, 0, 0.4);
+    --tile-filter: brightness(.7) invert(1) hue-rotate(180deg);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+[hidden] { display: none !important; }
+
+/* ---- Header ---------------------------------------------------------------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px var(--gutter) 8px;
+}
+.logo-link { display: flex; flex: none; }
+.logo-link img { display: block; max-height: 48px; max-width: 140px; width: auto; }
+.site-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+.contact {
+  flex: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.contact:hover { opacity: 0.85; }
+.contact:focus-visible, .tab:focus-visible, .legend-toggle:focus-visible {
+  outline: 2px solid #378ADD;
+  outline-offset: 2px;
+}
+
+/* ---- Main column ----------------------------------------------------------- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--gutter);
+  min-width: 0;
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--line);
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none;
+  appearance: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 500;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { color: var(--text); border-bottom-color: var(--text); }
+.when {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.when:empty { display: none; }
+.stale {
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 0.875rem;
+}
+.unavailable {
+  margin: 48px auto;
+  max-width: 28rem;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+/* ---- Map ------------------------------------------------------------------- */
+.map-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.map { position: absolute; inset: 0; }
+.leaflet-container {
+  background: var(--map-bg);
+  font: inherit;
+  font-size: 0.8125rem;
+}
+.leaflet-tile-pane { filter: var(--tile-filter); }
+.leaflet-control-attribution {
+  font-size: 0.6875rem;
+  background: var(--panel) !important;
+  color: var(--muted);
+}
+.leaflet-control-attribution a { color: inherit; }
+.leaflet-bar a {
+  background: var(--panel);
+  color: var(--text);
+  border-bottom-color: var(--line);
+}
+.leaflet-bar a:hover { background: var(--bg); }
+.leaflet-touch .leaflet-bar { border-color: var(--line); }
+
+.map-note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 800;
+  width: max-content;
+  max-width: calc(100% - 48px);
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+/* ---- Popups ---------------------------------------------------------------- */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.leaflet-popup-content-wrapper { border-radius: 10px; }
+.leaflet-popup-content { margin: 10px 14px; line-height: 1.4; }
+.leaflet-container a.leaflet-popup-close-button { color: var(--muted); }
+.pop p { margin: 0; }
+.pop-name { font-weight: 600; margin-bottom: 4px !important; overflow-wrap: anywhere; }
+.pop-head { font-weight: 500; }
+.pop-chance { font-weight: 600; }
+.pop-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: 0;
+}
+.pop-when, .pop-metrics { color: var(--muted); font-size: 0.8125rem; }
+
+/* ---- Public spots ---------------------------------------------------------- */
+.spot-marker { background: none; border: 0; }
+.spot-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.spot-star {
+  color: #1d1d1b;
+  font-size: 16px;
+  line-height: 18px;
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff;
+}
+.spot-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1d1d1b;
+  text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff;
+}
+@media (prefers-color-scheme: dark) {
+  .spot-star, .spot-label {
+    color: #f4f3ef;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 0 0 3px #000;
+  }
+}
+
+/* ---- Legend ---------------------------------------------------------------- */
+.legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 800;
+  max-width: calc(100% - 20px);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  font-size: 0.8125rem;
+}
+.legend-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  padding: 7px 12px;
+  cursor: pointer;
+  text-align: left;
+}
+.legend-toggle::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-left: auto;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+.legend-toggle[aria-expanded="true"]::after { transform: rotate(45deg) translate(-1px, -1px); }
+.legend-body { padding: 0 12px 10px; }
+.legend-list { list-style: none; margin: 0 0 6px; padding: 0; }
+.legend-list li { display: flex; align-items: center; gap: 8px; padding: 1.5px 0; }
+.legend-swatch { flex: none; width: 10px; height: 10px; border-radius: 50%; }
+.legend-swatch-faint { box-sizing: border-box; border: 1px solid; }
+.legend-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 3px 0 0;
+  color: var(--muted);
+}
+.key-size { display: inline-flex; align-items: center; gap: 2px; flex: none; }
+.key-size i { display: block; border-radius: 50%; background: var(--muted); }
+.key-size i:nth-child(1) { width: 4px; height: 4px; }
+.key-size i:nth-child(2) { width: 7px; height: 7px; }
+.key-size i:nth-child(3) { width: 10px; height: 10px; }
+.key-ring {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--muted);
+}
+
+/* ---- Footer ---------------------------------------------------------------- */
+.site-footer {
+  padding: 10px var(--gutter) 14px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.site-footer p { margin: 0 0 4px; max-width: 60rem; }
+.site-footer .small { font-size: 0.75rem; }
+
+@media (max-width: 480px) {
+  :root { --gutter: 12px; }
+  .site-header { gap: 10px; padding-top: 10px; }
+  .logo-link img { max-height: 36px; max-width: 96px; }
+  .site-title { font-size: 1.02rem; }
+  .contact { padding: 6px 12px; font-size: 0.8125rem; }
+  .tab { padding: 8px 10px; }
+  .when { font-size: 0.8125rem; }
+}
